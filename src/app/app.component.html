@@ -13,7 +13,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngFor="let task of tasks;">
+      <td>
+        <span *ngIf="task.isClosed; then notClosed" class="uk-text-emphasis">{{ task.name }}</span>
+        <ng-template #notClosed>
+          <s class="uk-text-danger">
+            <span class="uk-text-muted">{{ task.name }}</span>
+          </s>
+        </ng-template>
+      </td>
+      <td class="table-buttons uk-width-auto">
+        <button *ngIf="task.isClosed; then notDone" class="uk-button uk-button-text uk-button-small">Done</button>
+        <ng-template #notDone>
+          <button class="uk-button uk-button-text uk-button-small" disabled>Done</button>
+        </ng-template>
+      </td>
+      <td class="table-buttons uk-width-auto">
+        <button class="uk-button uk-button-text uk-button-small">Delete</button>
+      </td>
+    </tr>
+    <tr *ngIf="tasks.length == 0;">
       <td class="uk-text-center">
         <small class="uk-text-muted">Your tasks will appear here.</small>
       </td>
