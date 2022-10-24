@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
     this.tasks.push({
       id: 1,
       name: "Primeira task",
-      isClosed: false
+      isClosed: true
     })
   }
 }
