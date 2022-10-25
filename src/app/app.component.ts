@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     });
 
     this.tasks.push({
-      id: 1,
+      id: crypto.randomUUID(),
       name: "Primeira task",
       isClosed: true
     })
