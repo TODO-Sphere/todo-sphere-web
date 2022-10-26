@@ -9,6 +9,7 @@ import { Task } from '../models/task';
 })
 export class AppComponent implements OnInit {
 
+  lastIndex: number = 0;
   createTaskForm!: FormGroup;
   title = 'todo-ng';
   tasks: Task[] = [];
@@ -21,15 +22,32 @@ export class AppComponent implements OnInit {
     this.createTaskForm = this.fb.group({
       content: ['', [Validators.required]]
     });
-
-    this.tasks.push({
-      id: crypto.randomUUID(),
-      name: "Primeira task",
-      isClosed: true
-    })
   }
 
   createTask(): void {
-    console.log(this.createTaskForm.get('content')?.value);
+
+    this.lastIndex++;
+
+    let newTask = {
+      id: this.lastIndex,
+      name: this.createTaskForm.get('content')?.value,
+      isClosed: false
+    }
+
+    this.tasks.push(newTask);
+    this.createTaskForm.reset();
+  }
+
+  closeTask(id: number): void {
+    let task = this.tasks.find(i => i.id == id);
+    if (task != undefined) {
+      task.isClosed = true;
+    }
+  }
+
+  deleteTask(id: number): void {
+    this.tasks = this.tasks.filter((element) => {
+      return element.id != id
+    });
   }
 }

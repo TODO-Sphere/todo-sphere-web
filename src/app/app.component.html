@@ -30,13 +30,14 @@
         </ng-template>
       </td>
       <td class="table-buttons uk-width-auto">
-        <button *ngIf="!task.isClosed; else notDone" class="uk-button uk-button-text uk-button-small">Done</button>
-        <ng-template #notDone>
+        <button *ngIf="!task.isClosed; else done" (click)="closeTask(task.id)"
+          class="uk-button uk-button-text uk-button-small">Done</button>
+        <ng-template #done>
           <button class="uk-button uk-button-text uk-button-small" disabled>Done</button>
         </ng-template>
       </td>
       <td class="table-buttons uk-width-auto">
-        <button class="uk-button uk-button-text uk-button-small">Delete</button>
+        <button (click)="deleteTask(task.id)" class=" uk-button uk-button-text uk-button-small">Delete</button>
       </td>
     </tr>
     <tr *ngIf="tasks.length == 0;">
