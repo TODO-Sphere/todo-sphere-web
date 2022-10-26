@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Task } from '../models/task';
+import { Task } from './models/task';
 import { TaskService } from './services/task.service';
-import { generateRandomInt } from '../helpers/number';
+import { generateRandomInt } from './helpers/number';
 
 @Component({
   selector: 'app-root',
