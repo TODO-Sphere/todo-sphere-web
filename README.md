@@ -1,27 +1,24 @@
-# TodoNg
+# TODO Ng
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
+This is a simple TODO app made with:
 
-## Development server
+* Angular 13
+* UIKit
+* NgRx
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Setup
 
-## Code scaffolding
+You can run the application only with Docker installed on your machine with the command:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+docker-compose up -d
+```
 
-## Build
+Or, if you want to improve and develop, you are going to need installed:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* [Node 16+](https://nodejs.org/en/)
+* [Angular CLI 13.2.6](https://www.npmjs.com/package/@angular/cli)
+* [Json server](https://www.npmjs.com/package/json-server)
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The application runs with a fake backend (json-server), is a tool that easily helps you
+to simulate REST API calls.
