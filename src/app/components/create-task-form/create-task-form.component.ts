@@ -22,9 +22,7 @@ export class CreateTaskFormComponent implements OnInit {
 
   createTask(): void {
 
-    let newTask = createNewTask(this.createTaskForm.get('content')?.value);
-
-    this.taskService.add(newTask).subscribe();
+    this.taskService.add(this.createTaskForm.get('content')?.value).subscribe();
     this.createTaskForm.reset();
   }
 }

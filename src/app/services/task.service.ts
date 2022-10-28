@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Task } from '../models/task';
+import { createNewTask, Task } from '../models/task';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,8 @@ export class TaskService {
     return updatedTask;
   }
 
-  add(task: Task): Observable<Task> {
+  add(taskName: string): Observable<Task> {
+    let task = createNewTask(taskName);
     const newTask = this.http.post<Task>(this.baseUrl + this.endpoint, task);
     return newTask;
   }
