@@ -1,0 +1,15 @@
+<form novalidate (ngSubmit)="createTask()" [formGroup]="createTaskForm" class="uk-text-center uk-grid-small"
+    autocomplete="off" uk-grid>
+    <div class="uk-width-expand">
+        <input id="content" class="uk-input" type="text" placeholder="New task" name="content" formControlName="content"
+            autofocus required>
+        <span class="uk-text-danger"
+            *ngIf="createTaskForm.get('content')?.errors && (createTaskForm.get('content')?.touched || createTaskForm.get('content')?.dirty) ">
+            <p>The task must not be empty!</p>
+        </span>
+    </div>
+    <div>
+        <button class=" uk-button uk-button-danger" type="submit"
+            [disabled]="createTaskForm.invalid && (createTaskForm.dirty || createTaskForm.touched)">Add</button>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { createNewTask } from 'src/app/models/task';
+import { TaskService } from 'src/app/services/task.service';
+
+@Component({
+  selector: 'app-create-task-form',
+  templateUrl: './create-task-form.component.html',
+  styleUrls: ['./create-task-form.component.css']
+})
+export class CreateTaskFormComponent implements OnInit {
+
+  createTaskForm!: FormGroup;
+
+  constructor(private fb: FormBuilder, private taskService: TaskService) { }
+
+  ngOnInit(): void {
+    this.createTaskForm = this.fb.group({
+      content: ['', [Validators.required]]
+    });
+  }
+
+  createTask(): void {
+
+    let newTask = createNewTask(this.createTaskForm.get('content')?.value);
+
+    this.taskService.add(newTask).subscribe();
+    this.createTaskForm.reset();
+  }
+}

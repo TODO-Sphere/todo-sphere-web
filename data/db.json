@@ -1,9 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": 1235,
-      "name": "Primeira task",
-      "isClosed": true
-    }
-  ]
+  "tasks": []
 }

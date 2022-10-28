@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Task } from './models/task';
 import { TaskService } from './services/task.service';
-import { generateRandomInt } from './helpers/number';
 
 @Component({
   selector: 'app-root',
@@ -11,35 +9,17 @@ import { generateRandomInt } from './helpers/number';
 })
 export class AppComponent implements OnInit {
 
-  createTaskForm!: FormGroup;
   title = 'todo-ng';
   tasks: Task[] = [];
 
-  constructor(private fb: FormBuilder, private taskService: TaskService) {
+  constructor(private taskService: TaskService) {
 
   }
 
   ngOnInit(): void {
-    this.createTaskForm = this.fb.group({
-      content: ['', [Validators.required]]
-    });
 
     this.taskService.getAll()
       .subscribe(tasks => this.tasks = tasks);
-  }
-
-  createTask(): void {
-
-    let newTask = {
-      id: generateRandomInt(1, 10000),
-      name: this.createTaskForm.get('content')?.value,
-      isClosed: false
-    }
-
-    this.taskService.add(newTask).subscribe(task => {
-      this.tasks.push(task);
-    });
-    this.createTaskForm.reset();
   }
 
   closeTask(id: number): void {
