@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../../models/task';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -7,9 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskListComponent implements OnInit {
 
-  constructor() { }
+  tasks: Task[] = [];
+
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+
+    this.taskService.getAll()
+      .subscribe(tasks => this.tasks = tasks);
+  }
+
+  closeTask(id: number): void {
+
+    this.taskService.getById(id)
+      .subscribe(task => {
+        task.isClosed = true
+        this.taskService.update(task).subscribe(task => {
+          let foundTask = this.tasks.find(i => i.id == task.id);
+          if (foundTask != undefined) {
+            foundTask.isClosed = true;
+          }
+        });
+      });
+  }
+
+  deleteTask(id: number): void {
+    this.taskService.delete(id).subscribe(_ => {
+      this.tasks = this.tasks.filter((element) => {
+        return element.id != id
+      });
+    });
   }
 
 }
