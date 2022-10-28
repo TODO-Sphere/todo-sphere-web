@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { createNewTask } from 'src/app/models/task';
+import { Store } from '@ngrx/store';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class CreateTaskFormComponent implements OnInit {
 
   createTaskForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private taskService: TaskService) { }
+  constructor(private fb: FormBuilder, private taskService: TaskService, private store: Store) { }
 
   ngOnInit(): void {
     this.createTaskForm = this.fb.group({
