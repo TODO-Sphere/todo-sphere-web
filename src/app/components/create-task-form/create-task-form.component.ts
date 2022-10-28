@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { TaskService } from 'src/app/services/task.service';
+import { addTask } from 'src/app/store/task.actions';
 
 @Component({
   selector: 'app-create-task-form',
@@ -12,7 +12,7 @@ export class CreateTaskFormComponent implements OnInit {
 
   createTaskForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private taskService: TaskService, private store: Store) { }
+  constructor(private fb: FormBuilder, private store: Store) { }
 
   ngOnInit(): void {
     this.createTaskForm = this.fb.group({
@@ -20,9 +20,9 @@ export class CreateTaskFormComponent implements OnInit {
     });
   }
 
-  createTask(): void {
+  onSubmit() {
 
-    this.taskService.add(this.createTaskForm.get('content')?.value).subscribe();
+    this.store.dispatch(addTask({ name: this.createTaskForm.get('content')?.value }));
     this.createTaskForm.reset();
   }
 }

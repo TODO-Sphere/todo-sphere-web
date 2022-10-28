@@ -1,4 +1,4 @@
-<form novalidate (ngSubmit)="createTask()" [formGroup]="createTaskForm" class="uk-text-center uk-grid-small"
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="createTaskForm" class="uk-text-center uk-grid-small"
     autocomplete="off" uk-grid>
     <div class="uk-width-expand">
         <input id="content" class="uk-input" type="text" placeholder="New task" name="content" formControlName="content"
