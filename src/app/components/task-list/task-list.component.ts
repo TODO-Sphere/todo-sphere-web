@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../models/task';
-import { TaskService } from 'src/app/services/task.service';
+import { select, Store } from '@ngrx/store';
+import { deleteTask, getTasks } from 'src/app/store/task.actions';
+import { Observable, of } from 'rxjs';
+import { selectTasks } from 'src/app/store/task.reducers';
 
 @Component({
   selector: 'app-task-list',
@@ -9,18 +12,19 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TaskListComponent implements OnInit {
 
-  tasks: Task[] = [];
+  tasks$: Observable<Task[]> = of();
 
-  constructor(private taskService: TaskService) { }
+  constructor(private store: Store) {
+    this.store.dispatch(getTasks());
+    this.tasks$ = this.store.pipe(select(selectTasks));
+  }
 
   ngOnInit(): void {
-
-    this.taskService.getAll()
-      .subscribe(tasks => this.tasks = tasks);
   }
 
   closeTask(id: number): void {
 
+    /** 
     this.taskService.getById(id)
       .subscribe(task => {
         task.isClosed = true
@@ -30,15 +34,11 @@ export class TaskListComponent implements OnInit {
             foundTask.isClosed = true;
           }
         });
-      });
+      }); **/
   }
 
   deleteTask(id: number): void {
-    this.taskService.delete(id).subscribe(_ => {
-      this.tasks = this.tasks.filter((element) => {
-        return element.id != id
-      });
-    });
+    this.store.dispatch(deleteTask({ id }));
   }
 
 }

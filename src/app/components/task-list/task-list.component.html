@@ -5,7 +5,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let task of tasks;">
+        <tr *ngFor="let task of tasks$ | async;">
             <td>
                 <span *ngIf="!task.isClosed; else notClosed" class="uk-text-emphasis">{{ task.name }}</span>
                 <ng-template #notClosed>
@@ -25,7 +25,7 @@
                 <button (click)="deleteTask(task.id)" class=" uk-button uk-button-text uk-button-small">Delete</button>
             </td>
         </tr>
-        <tr *ngIf="tasks.length == 0;">
+        <tr *ngIf="(tasks$ | async)?.length == 0;">
             <td class="uk-text-center">
                 <small class="uk-text-muted">Your tasks will appear here.</small>
             </td>
