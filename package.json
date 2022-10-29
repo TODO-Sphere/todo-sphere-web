@@ -1,10 +1,10 @@
 {
   "name": "todo-ng",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "start:api": "json-server --watch ./data/db.json",
+    "dev": "concurrently \"ng serve --proxy-config proxy.conf.json --open\" \"json-server --watch db.json\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
