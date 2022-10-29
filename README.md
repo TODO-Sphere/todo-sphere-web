@@ -16,7 +16,7 @@ This application covers all this topics:
 * Modularization of the components;
 * Consume data from an API (a fake one in this case);
 * Asynchronous and reactive programming;
-* Using stores and reducres to communicate between components;
+* Using stores and reducers to communicate between components;
 
 ## Setup
 
