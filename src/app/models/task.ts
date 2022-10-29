@@ -13,3 +13,11 @@ export function createNewTask(content: string): Task {
         isClosed: false
     }
 }
+
+export function closeTask(task: Task): Task {
+    return {
+        id: task.id,
+        name: task.name,
+        isClosed: true
+    }
+}

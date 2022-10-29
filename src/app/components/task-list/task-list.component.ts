@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../models/task';
 import { select, Store } from '@ngrx/store';
-import { deleteTask, getTasks } from 'src/app/store/task.actions';
+import { closeTask, deleteTask, getTasks } from 'src/app/store/task.actions';
 import { Observable, of } from 'rxjs';
 import { selectTasks } from 'src/app/store/task.reducers';
 
@@ -22,19 +22,8 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeTask(id: number): void {
-
-    /** 
-    this.taskService.getById(id)
-      .subscribe(task => {
-        task.isClosed = true
-        this.taskService.update(task).subscribe(task => {
-          let foundTask = this.tasks.find(i => i.id == task.id);
-          if (foundTask != undefined) {
-            foundTask.isClosed = true;
-          }
-        });
-      }); **/
+  closeTask(task: Task): void {
+    this.store.dispatch(closeTask({ task }));
   }
 
   deleteTask(id: number): void {

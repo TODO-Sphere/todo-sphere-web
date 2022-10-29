@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { getTasks, TaskActionTypes, addTask, deleteTask } from './task.actions';
+import { getTasks, TaskActionTypes, addTask, deleteTask, closeTask } from './task.actions';
 import { of } from 'rxjs';
 import { switchMap, catchError, map, mergeMap } from 'rxjs/operators';
 import { TaskService } from '../services/task.service';
@@ -19,6 +19,16 @@ export class TaskEffect {
         this.actions$.pipe(
             ofType(addTask),
             switchMap((action) => this.taskService.add(action.name)
+                .pipe(
+                    mergeMap(() => this.loadAllTasks())
+                ))
+        )
+    );
+
+    closeTask$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(closeTask),
+            switchMap((action) => this.taskService.closeTask(action.task)
                 .pipe(
                     mergeMap(() => this.loadAllTasks())
                 ))

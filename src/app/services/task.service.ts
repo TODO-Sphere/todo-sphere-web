@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { resolve } from 'dns';
 import { Observable } from 'rxjs';
 
-import { createNewTask, Task } from '../models/task';
+import { createNewTask, closeTask, Task } from '../models/task';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +27,12 @@ export class TaskService {
 
   update(task: Task): Observable<Task> {
     const updatedTask = this.http.put<Task>(this.baseUrl + this.endpoint + task.id, task);
+    return updatedTask;
+  }
+
+  closeTask(task: Task): Observable<Task> {
+
+    let updatedTask = this.http.put<Task>(this.baseUrl + this.endpoint + task.id, closeTask(task));
     return updatedTask;
   }
 

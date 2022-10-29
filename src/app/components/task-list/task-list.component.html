@@ -15,7 +15,7 @@
                 </ng-template>
             </td>
             <td class="table-buttons uk-width-auto">
-                <button *ngIf="!task.isClosed; else done" (click)="closeTask(task.id)"
+                <button *ngIf="!task.isClosed; else done" (click)="closeTask(task)"
                     class="uk-button uk-button-text uk-button-small">Done</button>
                 <ng-template #done>
                     <button class="uk-button uk-button-text uk-button-small" disabled>Done</button>
