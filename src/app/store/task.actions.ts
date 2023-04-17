@@ -24,7 +24,7 @@ export const addTask = createAction(
 
 export const deleteTask = createAction(
     TaskActionTypes.Delete,
-    props<{ id: number }>()
+    props<{ id: string }>()
 );
 
 export const closeTask = createAction(
