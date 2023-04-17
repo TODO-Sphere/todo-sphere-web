@@ -4,7 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "dev": "concurrently \"ng serve --proxy-config proxy.conf.json --open\" \"json-server --watch db.json\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
