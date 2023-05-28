@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  todoApiBaseUrl: "https://my-todo-api.azurewebsites.net/api/"
+  todoApiBaseUrl: "https://my-todo-dotnet-api.azurewebsites.net/api/"
 };
