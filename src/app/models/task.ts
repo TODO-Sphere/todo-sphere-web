@@ -1,5 +1,5 @@
 export interface Task {
-    id: string;
+    code: string;
     name: string;
-    isClosed: boolean;
+    is_closed: boolean;
 }

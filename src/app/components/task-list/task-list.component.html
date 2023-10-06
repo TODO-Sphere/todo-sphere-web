@@ -7,7 +7,7 @@
     <tbody>
         <tr *ngFor="let task of tasks$ | async;">
             <td>
-                <span *ngIf="!task.isClosed; else notClosed" class="uk-text-emphasis">{{ task.name }}</span>
+                <span *ngIf="!task.is_closed; else notClosed" class="uk-text-emphasis">{{ task.name }}</span>
                 <ng-template #notClosed>
                     <s class="uk-text-danger">
                         <span class="uk-text-muted">{{ task.name }}</span>
@@ -15,14 +15,15 @@
                 </ng-template>
             </td>
             <td class="table-buttons uk-width-auto">
-                <button *ngIf="!task.isClosed; else done" (click)="closeTask(task)"
+                <button *ngIf="!task.is_closed; else done" (click)="closeTask(task)"
                     class="uk-button uk-button-text uk-button-small">Done</button>
                 <ng-template #done>
                     <button class="uk-button uk-button-text uk-button-small" disabled>Done</button>
                 </ng-template>
             </td>
             <td class="table-buttons uk-width-auto">
-                <button (click)="deleteTask(task.id)" class=" uk-button uk-button-text uk-button-small">Delete</button>
+                <button (click)="deleteTask(task.code)"
+                    class=" uk-button uk-button-text uk-button-small">Delete</button>
             </td>
         </tr>
         <tr *ngIf="(tasks$ | async)?.length == 0;">
