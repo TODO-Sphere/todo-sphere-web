@@ -13,25 +13,25 @@ export class TaskService extends TodoApi {
     super();
   }
 
-  getAll (): Observable<Task[]> {
+  getAll(): Observable<Task[]> {
     const tasks = this.http.get<Task[]>(this.baseUrl + this.taskEndpoint);
 
     return tasks;
   }
 
-  getById (id: number): Observable<Task> {
-    const task = this.http.get<Task>(this.baseUrl + this.taskEndpoint + id);
+  getByCode(code: number): Observable<Task> {
+    const task = this.http.get<Task>(this.baseUrl + this.taskEndpoint + code);
     return task;
   }
 
-  closeTask (task: Task): Observable<Task> {
+  closeTask(task: Task): Observable<Task> {
 
-    const closeEndpoint = this.baseUrl + this.taskEndpoint + task.id + '/close';
+    const closeEndpoint = this.baseUrl + this.taskEndpoint + task.code + '/close';
     let updatedTask = this.http.put<Task>(closeEndpoint, '');
     return updatedTask;
   }
 
-  add (taskName: string): Observable<Task> {
+  add(taskName: string): Observable<Task> {
     let task = {
       name: taskName
     };
@@ -40,8 +40,8 @@ export class TaskService extends TodoApi {
     return newTask;
   }
 
-  delete (id: string): Observable<string> {
-    const deletedTask = this.http.delete(this.baseUrl + this.taskEndpoint + id, {
+  delete(code: string): Observable<string> {
+    const deletedTask = this.http.delete(this.baseUrl + this.taskEndpoint + code, {
       responseType: "text"
     });
     return deletedTask;

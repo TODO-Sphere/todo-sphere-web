@@ -38,7 +38,7 @@ export class TaskEffect {
     deleteTask$ = createEffect(() =>
         this.actions$.pipe(
             ofType(deleteTask),
-            switchMap((action) => this.taskService.delete(action.id)
+            switchMap((action) => this.taskService.delete(action.code)
                 .pipe(
                     mergeMap(() => this.loadAllTasks())
                 ))

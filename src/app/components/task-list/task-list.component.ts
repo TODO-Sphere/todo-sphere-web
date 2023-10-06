@@ -19,15 +19,15 @@ export class TaskListComponent implements OnInit {
     this.tasks$ = this.store.pipe(select(selectTasks));
   }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
   }
 
-  closeTask (task: Task): void {
+  closeTask(task: Task): void {
     this.store.dispatch(closeTask({ task }));
   }
 
-  deleteTask (id: string): void {
-    this.store.dispatch(deleteTask({ id }));
+  deleteTask(code: string): void {
+    this.store.dispatch(deleteTask({ code }));
   }
 
 }
