@@ -11,6 +11,7 @@ import { Task } from "src/app/models/task";
 export class TaskApi extends TodoApi implements TaskRepository {
   constructor(private http: HttpClient) {
     super();
+    console.log("Its on API Mode");
   }
 
   getAll(): Observable<Task[]> {

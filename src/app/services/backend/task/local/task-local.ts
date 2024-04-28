@@ -12,6 +12,7 @@ export class TaskLocal implements TaskRepository {
 
   constructor() {
     this.tasks = [];
+    console.log("Its on Local Mode");
   }
 
   getAll(): Observable<Task[]> {
@@ -56,8 +57,11 @@ export class TaskLocal implements TaskRepository {
   }
 
   private addNewTask(taskName: string): Task {
+    var taskCode = uuidv4();
+
     var newTask = {
-      code: uuidv4(),
+      _id: taskCode,
+      code: taskCode,
       name: taskName,
       is_closed: false,
     };

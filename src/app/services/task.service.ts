@@ -4,6 +4,7 @@ import { Task } from "../models/task";
 import { TaskRepository } from "./backend/task/task-repository";
 import { getTaskRepository } from "./backend/task/task-factory";
 import { HttpClient } from "@angular/common/http";
+import { RealmClient } from "./backend/realm-client";
 
 @Injectable({
   providedIn: "root",
@@ -11,8 +12,8 @@ import { HttpClient } from "@angular/common/http";
 export class TaskService {
   private repository: TaskRepository;
 
-  constructor(http: HttpClient) {
-    this.repository = getTaskRepository(http);
+  constructor(http: HttpClient, realmClient: RealmClient) {
+    this.repository = getTaskRepository(http, realmClient);
   }
 
   getAll(): Observable<Task[]> {

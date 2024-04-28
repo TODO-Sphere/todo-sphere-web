@@ -1,5 +1,8 @@
+import { BSON } from "realm-web";
+
 export interface Task {
-    code: string;
-    name: string;
-    is_closed: boolean;
+  _id: string | BSON.ObjectId;
+  code: string;
+  name: string;
+  is_closed: boolean;
 }
