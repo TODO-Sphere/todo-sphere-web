@@ -1,49 +1,38 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Task } from '../models/task';
-import { TodoApi } from './todoApi';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Task } from "../models/task";
+import { TaskRepository } from "./backend/task/task-repository";
+import { getTaskRepository } from "./backend/task/task-factory";
+import { HttpClient } from "@angular/common/http";
+import { RealmClient } from "./backend/realm-client";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class TaskService extends TodoApi {
+export class TaskService {
+  private repository: TaskRepository;
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(http: HttpClient, realmClient: RealmClient) {
+    this.repository = getTaskRepository(http, realmClient);
   }
 
   getAll(): Observable<Task[]> {
-    const tasks = this.http.get<Task[]>(this.baseUrl + this.taskEndpoint);
-
-    return tasks;
+    return this.repository.getAll();
   }
 
-  getByCode(code: number): Observable<Task> {
-    const task = this.http.get<Task>(this.baseUrl + this.taskEndpoint + code);
-    return task;
+  getByCode(code: string): Observable<Task | undefined> {
+    return this.repository.getByCode(code);
   }
 
   closeTask(task: Task): Observable<Task> {
-
-    const closeEndpoint = this.baseUrl + this.taskEndpoint + task.code + '/close';
-    let updatedTask = this.http.put<Task>(closeEndpoint, '');
-    return updatedTask;
+    return this.repository.closeTask(task);
   }
 
   add(taskName: string): Observable<Task> {
-    let task = {
-      name: taskName
-    };
-
-    const newTask = this.http.post<Task>(this.baseUrl + this.taskEndpoint, task);
-    return newTask;
+    return this.repository.add(taskName);
   }
 
   delete(code: string): Observable<string> {
-    const deletedTask = this.http.delete(this.baseUrl + this.taskEndpoint + code, {
-      responseType: "text"
-    });
-    return deletedTask;
+    return this.repository.delete(code);
   }
 }
