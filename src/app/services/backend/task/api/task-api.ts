@@ -17,7 +17,7 @@ export class TaskApi extends TodoApi implements TaskRepository {
     return this.http.get<Task[]>(this.baseUrl + this.taskEndpoint);
   }
 
-  getByCode(code: number): Observable<Task> {
+  getByCode(code: string): Observable<Task | undefined> {
     const task = this.http.get<Task>(this.baseUrl + this.taskEndpoint + code);
     return task;
   }

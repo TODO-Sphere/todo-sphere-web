@@ -19,7 +19,7 @@ export class TaskService {
     return this.repository.getAll();
   }
 
-  getByCode(code: number): Observable<Task> {
+  getByCode(code: string): Observable<Task | undefined> {
     return this.repository.getByCode(code);
   }
 
